@@ -1,0 +1,8 @@
+- name: "Database Server"
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - mariadb-server
+   - mariadb
+
+- name: "MySQL enabled?"
+  service: name=mariadb state=started enabled=yes

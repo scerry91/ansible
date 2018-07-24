@@ -1,0 +1,18 @@
+- name: "Installing Packages for centos"
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - git
+   - vim
+   - ntp
+   - libsemanage-python
+   - libselinux-python
+  when: ansible_os_family == "RedHat"
+
+- name: "Installing Packages for debian"
+  apt: pkg={{ item }} state=present
+  with_items:
+   - git
+   - vim
+   - ntp
+  when: ansible_os_family == "Debian"
+

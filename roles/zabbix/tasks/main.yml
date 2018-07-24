@@ -1,0 +1,43 @@
+- name: "Installing Packages"
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - policycoreutils-python
+   - mariadb-server
+   - httpd 
+   - epel-release
+   - mod_php72w
+   - php72w-cli
+   - php72w-common
+   - php72w-devel
+   - php72w-pear
+   - php72w-gd 
+   - php72w-mbstring 
+   - php72w-mysql
+   - php72w-xml
+   - php72w-bcmath 
+   - zabbix-get
+   - zabbix-server-mysql
+   - zabbix-web-mysql
+   - zabbix-agent
+
+- name: httpd can connect
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+
+- name: httpd can connect to zabbix
+  seboolean:
+    name: httpd_can_connect_zabbix
+    state: yes
+    persistent: yes
+
+- name: network zabbix
+  seboolean:
+    name: zabbix_can_network
+    state: yes
+    persistent: yes
+
+- name: "zabbix enabled?"
+  service: name=zabbix-server state=started enabled=yes
+
