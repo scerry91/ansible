@@ -1,0 +1,13 @@
+---
+
+- name: start ldap-debian
+  service: name=sssd state=started
+  service: name=nslcd state=started
+  service: name=nscd state=started
+  when: ansible_os_family == "Debian"
+
+- name: start ldap-centos
+  service: name=nslcd state=started
+  service: name=nscd state=started
+  when: ansible_os_family == "RedHat"
+
