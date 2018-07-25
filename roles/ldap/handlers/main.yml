@@ -3,14 +3,14 @@
 - name: start ldap-debian
   service: name={{ item.name }} state={{ item.state  }}
   with_items:
-   - { name: 'sssd', state: 'started' }
-   - { name: 'nslcd', state: 'started' }
-   - { name: 'nscd', state: 'started' }
+   - { name: 'sssd', state: 'restarted', update_cache: 'yes' }
+   - { name: 'nslcd', state: 'restarted', update_cache: 'yes' }
+   - { name: 'nscd', state: 'restarted', update_cache: 'yes' }
   when: ansible_os_family == "Debian"
 
 - name: start ldap-centos
   service: name={{ item.name }} state={{ item.state }}
   with_items:
-   - { name: 'nslcd', state: 'started' }
-   - { name: 'nscd', state: 'started' } 
+   - { name: 'nslcd', state: 'restarted', update_cache: 'yes' }
+   - { name: 'nscd', state: 'restarted', update_cache: 'yes' } 
   when: ansible_os_family == "RedHat"

@@ -17,4 +17,3 @@
    - nss-pam-ldapd
   when: ansible_os_family == "RedHat"
 
-- include: software.yml

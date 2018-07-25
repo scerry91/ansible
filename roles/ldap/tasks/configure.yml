@@ -1,24 +1,25 @@
 ---
 
 - name: Adding LDAP files Centos
-  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} mode={{ item.mode }}
+  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
   with_items:
-   - { src: 'ldap.conf', dest: '/etc/openldap/ldap.conf', owner: 'root', mode: '0644' }
-   - { src: 'system-auth', dest: '/etc/pam.d/system-auth-ac', owner: 'root', mode: '0644' }
-   - { src: 'nscd.conf', dest: '/etc/openldap/nscd.conf', owner: 'root', mode: '0644' }
-   - { src: 'system-auth', dest: '/etc/pam.d/system-auth', owner: 'root', mode: '0644' }
-   - { src: 'nsswitch.conf', dest: '/etc/nsswitch.conf', owner: 'root', mode: '0644' }
-   - { src: 'nslcd.conf-centos', dest: '/etc/nslcd.conf', owner: 'root', mode: '0644' }
+   - { src: 'ldap.conf', dest: '/etc/openldap/ldap.conf', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'system-auth', dest: '/etc/pam.d/system-auth-ac', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'nscd.conf', dest: '/etc/openldap/nscd.conf', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'system-auth', dest: '/etc/pam.d/system-auth', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'nsswitch.conf', dest: '/etc/nsswitch.conf', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'nslcd.conf-centos', dest: '/etc/nslcd.conf', owner: 'root', group: 'root', mode: '0644' }
   when: ansible_os_family == "RedHat"
   notify: start ldap-centos
 
 - name: Adding LDAP files for Debian
-  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} mode={{ item.mode }}
+  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
   with_items:
-   - { src: 'sssd.conf', dest: '/etc/sssd/sssd.conf', owner: 'root', mode: '0600' }
-   - { src: 'nsswitch.conf', dest: '/etc/nsswitch.conf', owner: 'root', mode: '0644' }
-   - { src: 'nslcd.conf', dest: '/etc/nslcd.conf', owner: 'root', mode: '0644' }
-   - { src: 'ldap.conf', dest: '/etc/ldap/ldap.conf', owner: 'root', mode: '0644' }
-   - { src: 'common-session', dest: '/etc/pam.d/common-session', owner: 'root', mode: '0644' }
+   - { src: 'sssd.conf', dest: '/etc/sssd/sssd.conf', owner: 'root', group: 'root', mode: '0600' }
+   - { src: 'nsswitch.conf', dest: '/etc/nsswitch.conf', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'nslcd.conf', dest: '/etc/nslcd.conf', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'ldap.conf', dest: '/etc/ldap/ldap.conf', owner: 'root', group: 'root', mode: '0644' }
+   - { src: 'common-session', dest: '/etc/pam.d/common-session', owner: 'root', group: 'root', mode: '0644' }
   when: ansible_os_family == "Debian"
   notify: start ldap-debian
+
