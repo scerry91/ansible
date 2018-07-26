@@ -1,8 +1,13 @@
-- name: "Database Server"
+- name: "Installing MySQL for RedHat"
   yum: pkg={{ item }} state=installed
   with_items:
    - mariadb-server
    - mariadb
+  when: ansible_os_family == "RedHat"
 
-- name: "MySQL enabled?"
-  service: name=mariadb state=started enabled=yes
+- name: "Installing MySQL for Debian"
+  apt: pkg={{ item }} state=installed
+  with_items:
+   - mysql-server
+  when: ansible_os_family == "Debian"
+
