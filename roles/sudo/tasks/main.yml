@@ -1,6 +1,16 @@
 ---
 
-- name: "Adding sudoers file"
-  copy: src=../files/sudoers dest=/etc/sudoers owner=root group=root mode=0600
+include: configure.yml
 
+- name: Install sudo for Debian
+  apt: pkg={{ item }} state=present
+  with_items:
+   - sudo
+  when: ansible_os_family == "Debian""
+
+- name: Install sudo for RedHat
+  yum: pkg={{ item }} state=present
+  with_items:
+   - sudo
+  when: ansible_os_family == "RedHat"
 
