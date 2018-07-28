@@ -1,0 +1,11 @@
+- name: start apache2 debian
+  service: name={{ item.name }} state={{ item.state  }} 
+  with_items:
+   - { name: 'apache2', state: 'started' }
+  when: ansible_os_family == "Debian"
+
+- name: start httpd centos
+  service: name={{ item.name }} state={{ item.state }}
+  with_items:
+   - { name: 'httpd', state: 'started' }
+  when: ansible_os_family == "RedHat"

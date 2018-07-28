@@ -6,6 +6,7 @@
    - nano
    - ntp
    - iotop
+   - libsemanage-python	 
   when: ansible_os_family == "RedHat"
 
 - name: "Installing Packages for debian"

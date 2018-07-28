@@ -10,6 +10,7 @@ symbolic-links=0
 log-bin
 server_id=1
 replicate-do-db=zabbix
+replicate-do-db=country
 bind-address=192.168.1.120
 
 

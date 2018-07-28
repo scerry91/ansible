@@ -1,12 +1,26 @@
 - name: "Installing Webserver Software for Centos"
-  yum: name={{ item }} state=present update_cache=yes
+  yum: name={{ item }} state=present
   with_items:
    - httpd
+   - php
+   - php-mysql
   when: ansible_os_family == "RedHat"
 
 - name: "Installing Webserver Software for Debian"
-  apt: name={{ item }} state=present update_cache=yes
+  apt: name={{ item }} state=present 
   with_items:
    - apache2
+   - libapache2-mod-php7.0
+   - php7.0
+   - php7.0-mysql
+   - phpmyadmin
   when: ansible_os_family == "Debian"
 
+- include: start.yml
+
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+  when: ansible_os_family == "RedHat"
