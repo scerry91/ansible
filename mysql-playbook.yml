@@ -1,0 +1,10 @@
+- hosts: mysql-master
+  become: true
+  roles:
+   - database
+
+- hosts: mysql-replication
+  become: true
+  roles:
+   - database
+
