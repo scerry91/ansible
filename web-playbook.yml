@@ -1,0 +1,10 @@
+- hosts: debian-web
+  become: true
+  roles:
+   - webserver
+
+- hosts: centos-web
+  become: true
+  roles:
+   - webserver
+   - firewall
