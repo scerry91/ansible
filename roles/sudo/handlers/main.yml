@@ -1,14 +1,12 @@
----
-
-- name: restart ntp debian
+- name: restart ssh
   service: name={{ item.name }} state={{ item.state  }} 
   with_items:
-   - { name: 'ntp', state: 'restarted', update_cache: 'yes' }
+   - { name: 'ssh', state: 'restarted', update_cache: 'yes' }
   when: ansible_os_family == "Debian"
 
-- name: restart ntpd centos
+- name: restart ssh
   service: name={{ item.name }} state={{ item.state  }}
   with_items:
-   - { name: 'ntpd', state: 'restarted', update_cache: 'yes' }
+   - { name: 'sshd', state: 'restarted', update_cache: 'yes' }
   when: ansible_os_family == "RedHat"
 

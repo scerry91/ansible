@@ -1,21 +1,21 @@
 ---
 
-- include: configure.yml
-
 - name: "Installing Packages for centos"
   yum: pkg={{ item }} state=installed
   with_items:
-   - git
-   - vim
+   - nano
    - ntp
-   - libsemanage-python
-   - libselinux-python
+   - iotop
   when: ansible_os_family == "RedHat"
 
 - name: "Installing Packages for debian"
   apt: pkg={{ item }} state=present
   with_items:
-   - git
-   - vim
+   - nano
    - ntp
+   - iftop
+   - iotop
   when: ansible_os_family == "Debian"
+
+- include: configure.yml
+- include: startntp.yml

@@ -1,5 +1,20 @@
-- name: Adding sshd config
+---
+
+- name: Adding ntp file
   copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
   with_items:
-   - { src: 'sshd.conf', dest: '/etc/ssh/sshd.conf', owner: 'root', group: 'root', mode: '0644' }
-  notify: restart ssh
+   - { src: 'ntp.conf-debian', dest: '/etc/ntp.conf', owner: 'root', group: 'root', mode: '0644' }
+  when: ansible_os_family == "Debian"
+  notify: restart ntp debian  
+  
+- name: Adding ntp file
+  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+  with_items:
+   - { src: 'ntp.conf-centos', dest: '/etc/ntp.conf', owner: 'root', group: 'root', mode: '0644' }
+  when: ansible_os_family == "RedHat"
+  notify: restart ntpd centos
+
+- file: 
+    src: /usr/share/zoneinfo/GB
+    dest: /etc/localtime
+    state: link
