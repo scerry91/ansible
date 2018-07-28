@@ -1,0 +1,7 @@
+---
+
+- name: start MySQL
+  service: name={{ item.name }} state={{ item.state}}
+  with_items:
+   - { name: 'sssd', state: 'started', update_cache: 'yes' }
+  when: ansible_os_family == "Debian"

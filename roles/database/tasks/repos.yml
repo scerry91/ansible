@@ -1,0 +1,10 @@
+---
+
+- name: "Add MariaDB repository"
+  yum_repository:
+   name: MariaDB
+   description: EPEL YUM repo
+   baseurl: http://yum.mariadb.org/10.1/centos7-amd64
+   file: MariaDB.repo
+   gpgcheck: yes
+   gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB

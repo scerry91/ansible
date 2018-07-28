@@ -1,7 +1,7 @@
-- name: "MySQL enabled for Centos?"
-  service: name=mariadb state=started enabled=yes
-  when: ansible_os_family == "RedHat"
+---
 
-- name "MySQL enabled for Debian?"
-  service: name=mysql state started enabled yes
-  when: ansible_os_family == "Debian"
+- name: start MySQL
+  service: name={{ item.name }} state={{ item.state}}
+  with_items:
+   - { name: 'mariadb', state: 'restarted', update_cache: 'yes' }
+  when: ansible_os_family == "RedHat"

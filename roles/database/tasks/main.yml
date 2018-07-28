@@ -1,9 +1,19 @@
+- include: configure.yml
+
 - name: "Installing MySQL for RedHat"
   yum: pkg={{ item }} state=installed
   with_items:
    - mariadb-server
    - mariadb
   when: ansible_os_family == "RedHat"
+
+- name: "Start Mariadb"
+  service: name=mariadb state=started enabled=yes
+
+
+- include: repos.yml
+  when: ansible_os_family == "RedHat"
+
 
 - name: "Installing MySQL for Debian"
   apt: pkg={{ item }} state=installed

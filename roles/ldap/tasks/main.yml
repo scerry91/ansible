@@ -3,7 +3,7 @@
 - include: configure.yml
 
 - name: Install ldap software for Debian
-  apt: pkg={{ item }} state=present
+  apt: pkg={{ item }} state=present update_cache=yes
   with_items:
    - sssd
    - ruby-ldap
@@ -11,7 +11,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Install ldap software for RedHat
-  yum: pkg={{ item }} state=installed
+  yum: pkg={{ item }} state=installed update_cache=yes
   with_items:
    - openldap-clients
    - nss-pam-ldapd
