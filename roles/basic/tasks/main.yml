@@ -1,3 +1,7 @@
+---
+
+- include: configure.yml
+
 - name: "Installing Packages for centos"
   yum: pkg={{ item }} state=installed
   with_items:
@@ -15,4 +19,3 @@
    - vim
    - ntp
   when: ansible_os_family == "Debian"
-

@@ -1,6 +1,7 @@
 ---
 
 - include: configure.yml
+- include: start.yml
 
 - name: Install ldap software for Debian
   apt: pkg={{ item }} state=present update_cache=yes

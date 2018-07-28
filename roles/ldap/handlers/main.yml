@@ -1,6 +1,6 @@
 ---
 
-- name: start ldap-debian
+- name: restart ldap-debian
   service: name={{ item.name }} state={{ item.state  }} 
   with_items:
    - { name: 'sssd', state: 'restarted', update_cache: 'yes' }
@@ -8,7 +8,7 @@
    - { name: 'nscd', state: 'restarted', update_cache: 'yes' }
   when: ansible_os_family == "Debian"
 
-- name: start ldap-centos
+- name: restart ldap-centos
   service: name={{ item.name }} state={{ item.state }}
   with_items:
    - { name: 'nslcd', state: 'restarted', update_cache: 'yes' }
