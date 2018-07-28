@@ -3,10 +3,10 @@
 - name: Adding MySQL config to the master
   copy: src=my.cnf-master dest=/etc/my.cnf
   when: ansible_hostname == "mysql-master"
-  notify: start MySQL
+  notify: restart MySQL
 
 - name: Adding MySQL config to the slave
   copy: src=my.cnf-slave dest=/etc/my.cnf
   when: ansible_hostname == "mysql-replication"
-  notify: start MySQL
+  notify: restart MySQL
 

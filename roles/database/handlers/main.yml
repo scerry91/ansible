@@ -1,6 +1,6 @@
 ---
 
-- name: start MySQL
+- name: restart MySQL
   service: name={{ item.name }} state={{ item.state}}
   with_items:
    - { name: 'mariadb', state: 'restarted', update_cache: 'yes' }
