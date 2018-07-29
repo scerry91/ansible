@@ -18,3 +18,15 @@
     src: /usr/share/zoneinfo/GB
     dest: /etc/localtime
     state: link
+
+- name: Enable firewalld
+  service: name=firewalld state=started enabled=yes
+  when: ansible_os_family == "RedHat"
+
+- name: Allow ntp
+  command: firewall-cmd --add-service=ntp --permanent
+  when: ansible_os_family == "RedHat"
+
+- name: Bounce firewalld
+  service: name=firewalld state=restarted
+  when: ansible_os_family == "RedHat"

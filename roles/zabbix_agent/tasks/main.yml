@@ -19,3 +19,4 @@
     register: zabbix_service
     when: not zabbix_agent_installed.stat.exists
 
+  - include: configure.yml

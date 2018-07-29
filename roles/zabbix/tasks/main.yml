@@ -1,8 +1,9 @@
+- include: install.yml
+
 - name: "Installing Packages"
   yum: pkg={{ item }} state=installed
   with_items:
    - policycoreutils-python
-   - mariadb-server
    - httpd 
    - epel-release
    - mod_php72w
@@ -40,4 +41,7 @@
 
 - name: "zabbix enabled?"
   service: name=zabbix-server state=started enabled=yes
+
+- name: "httpd enabled?"
+  service: name=httpd state=started enabled=yes
 
