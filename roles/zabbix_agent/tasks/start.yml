@@ -1,0 +1,5 @@
+- name: start zabbix agent
+  service: name={{ item.name }} state={{ item.state  }} 
+  with_items:
+   - { name: 'zabbix-agent', state: 'started' }
+

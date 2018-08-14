@@ -30,3 +30,14 @@
 - name: Bounce firewalld
   service: name=firewalld state=restarted
   when: ansible_os_family == "RedHat"
+
+- name: take immutable file
+  command: chattr -i /etc/resolv.conf
+
+- name: Adding resolf.conf
+  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+  with_items:
+   - { src: 'resolv.conf', dest: '/etc/resolv.conf', owner: 'root', group: 'root', mode: '0644' }
+
+- name: immutable file
+  command: chattr +i /etc/resolv.conf

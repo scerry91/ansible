@@ -20,3 +20,4 @@
     when: not zabbix_agent_installed.stat.exists
 
   - include: configure.yml
+  - include: start.yml
