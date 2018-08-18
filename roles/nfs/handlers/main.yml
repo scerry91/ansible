@@ -1,0 +1,5 @@
+---
+ - name: restart nfs
+   service: name={{ item.name }} state={{ item.state }}
+   with_items:
+    - { name: 'nfs-server', state: 'restarted', update_cache: 'yes' }

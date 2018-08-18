@@ -1,0 +1,7 @@
+---
+
+ - name: Install NFS storage for Centos
+   yum: pkg={{ item }} state=present update_cache=yes
+   with_items:
+    - nfs-utils
+   when: ansible_os_family == "RedHat"

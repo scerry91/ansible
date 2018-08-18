@@ -1,0 +1,23 @@
+---
+
+ - name: starting and enabling services 
+   service: name={{ item.name }} state={{ item.state }}
+   with_items:
+    - { name: 'rpcbind', state: 'started' }
+    - { name: 'nfs-server', state: 'started' } 
+    - { name: 'nfs-lock', state: 'started' } 
+    - { name: 'nfs-idmap', state: 'started' }
+
+ - name: Adding nfs export file
+   copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+   with_items:
+    - { src: 'exports', dest: '/etc/exports', owner: 'root', group: 'root', mode: '0644' }
+   notify: restart nfs
+
+ - name: Create home dir
+   file: 
+    path: /exports/home
+    state: directory
+    owner: nfsnobody
+    group: nfsnobody
+    mode: 0755

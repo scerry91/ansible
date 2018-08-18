@@ -1,0 +1,20 @@
+---
+ - name: Enable Firewalld
+   service: name=firewalld state=started enabled=yes
+   when: ansible_os_family == "RedHat"
+   
+ - name: Allow nfs
+   command: firewall-cmd --permanent --zone=public --add-service=nfs
+   when: ansible_os_family == "RedHat"
+
+ - name: Allow mountd
+   command: firewall-cmd --permanent --zone=public --add-service=mountd
+   when: ansible_os_family == "RedHat"
+
+ - name: Allow bind
+   command: firewall-cmd --permanent --zone=public --add-service=rpc-bind
+   when: ansible_os_family == "RedHat"
+
+ - name: Bounce firewalld
+   service: name=firewalld state=restarted
+   when: ansible_os_family == "RedHat"

@@ -7,6 +7,7 @@
    - ntp
    - iotop
    - libsemanage-python	 
+   - nfs-utils
   when: ansible_os_family == "RedHat"
 
 - name: "Installing Packages for debian"
@@ -16,6 +17,7 @@
    - ntp
    - iftop
    - iotop
+   - nfs-common
   when: ansible_os_family == "Debian"
 
 - include: configure.yml
